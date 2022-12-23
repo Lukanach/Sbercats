@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,11 +12,168 @@
       crossorigin="anonymous"
     />
     <script defer src="./script.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
     <title>Document</title>
   </head>
   <body>
     <div class="container py-5">
-      <div data-wr></div>
+      <h1 class="text-center mb-2">Cats</h1>
+
+      <div class="d-flex justify-content-center">
+        <button
+          data-openModal="createCat"
+          type="button"
+          class="btn btn-success mb-2"
+        >
+          Добавить кота
+        </button>
+      </div>
+
+      <hr class="mb-5" />
+      <div data-wr class="d-flex flex-wrap"></div>
     </div>
+
+    <div data-modalWr class="modal hidden">
+      <div data-modalContent class="modal__content"></div>
+    </div>
+
+    <template id="createCatForm">
+      <h3 class="text-center mb-3">Добавить нового кота</h3>
+      <form name="createCatForm">
+        <div class="mb-3">
+          <input
+            type="number"
+            name="id"
+            placeholder="Id"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            name="name"
+            required
+            placeholder="Имя"
+            class="form-control"
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="number"
+            name="age"
+            placeholder="Возраст"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <input
+            type="text"
+            name="description"
+            placeholder="Описание"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <input
+            type="text"
+            name="image"
+            placeholder="Ссылка"
+            class="form-control"
+          />
+        </div>
+
+        <div class="mb-3">
+          <input type="range" name="rate" min="1" max="10" />
+        </div>
+
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            name="favorite"
+            class="form-check-input"
+            id="exampleCheck1"
+          />
+          <label class="form-check-label" for="exampleCheck1">Любимчик</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+      </form>
+    </template>
+   
+  <div data-modalWr2 class="modal hidden">
+    <div data-wr2 data-modalContent2 class="modal__content"></div>
+  </div>
+
+  <div data-modalWr3 class="modal hidden">
+    <div data-wr3 data-modalContent3 class="modal__content"></div>
+  </div>
+
+  <template id="ChangeCatForm">
+    <h3 class="text-center mb-3">Изменить кота</h3>
+    <form name="createCatForm">
+      <div class="mb-3">
+        <input
+          type="number"
+          name="id"
+          placeholder="Id"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="text"
+          name="name"
+          required
+          placeholder="Имя"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <input
+          type="number"
+          name="age"
+          placeholder="Возраст"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="text"
+          name="description"
+          placeholder="Описание"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="text"
+          name="image"
+          placeholder="Ссылка"
+          class="form-control"
+        />
+      </div>
+
+      <div class="mb-3">
+        <input type="range" name="rate" min="1" max="10" />
+      </div>
+
+      <div class="mb-3 form-check">
+        <input
+          type="checkbox"
+          name="favorite"
+          class="form-check-input"
+          id="exampleCheck1"
+        />
+        <label class="form-check-label" for="exampleCheck1">Любимчик</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+  </template>
+
   </body>
 </html>
