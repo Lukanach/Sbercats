@@ -1,20 +1,20 @@
 const $wr = document.querySelector('[data-wr]')
 const $wr2 = document.querySelector('[data-wr2]')
-const $wr3 = document.querySelector('[data-wr3]')
+// const $wr3 = document.querySelector('[data-wr3]')
 
 const $modalWr = document.querySelector('[data-modalWr]')
 const $modalWr2 = document.querySelector('[data-modalWr2]')
-const $modalWr3 = document.querySelector('[data-modalWr3]')
+// const $modalWr3 = document.querySelector('[data-modalWr3]')
 
 const $modalContent = document.querySelector('[data-modalContent]')
 const $modalContent2 = document.querySelector('[data-modalContent2]')
-const $modalContent3 = document.querySelector('[data-modalContent3]')
+// const $modalContent3 = document.querySelector('[data-modalContent3]')
 
 const $catCreateFormTemplate = document.getElementById('createCatForm')
-const $catRemoveFormTemplate = document.getElementById('ChangeCatForm')
+// const $catRemoveFormTemplate = document.getElementById('ChangeCatForm')
 
 const CREATE_FORM_LS_KEY = 'CREATE_FORM_LS_KEY'
-const CHANGE_FORM_LS_KEY = 'CHANGE_FORM_LS_KEY'
+// const CHANGE_FORM_LS_KEY = 'CHANGE_FORM_LS_KEY'
 
 const ACTIONS = {
   DETAIL: 'detail',
@@ -31,7 +31,7 @@ const getCatHTML = (cat) => `
 				${cat.description}
 			</p>
 			<button data-action="${ACTIONS.DETAIL}" data-openModal="AboutCat" type="button" class="btn btn-primary">Подробнее</button>
-      <button data-action="${ACTIONS.CHANGE}" data-openModal="ChangeCat" type="button" class="btn btn-secondary">Изменить</button>
+
       <button data-action="${ACTIONS.DELETE}" type="button" class="btn btn-danger">Удалить</button>
 		</div>
 	</div>
@@ -234,86 +234,86 @@ document.addEventListener('keydown', (e) => {
 
 // Модалка изменить кота
 
-const formatRemoveFormData = (formDataObject) => ({
-  ...formDataObject,
-  id: +formDataObject.id,
-  rate: +formDataObject.rate,
-  age: +formDataObject.age,
-  favorite: !!formDataObject.favorite,
-})
+// const formatRemoveFormData = (formDataObject) => ({
+//   ...formDataObject,
+//   id: +formDataObject.id,
+//   rate: +formDataObject.rate,
+//   age: +formDataObject.age,
+//   favorite: !!formDataObject.favorite,
+// })
 
-const clickModalWrHandler3 = (e) => {
-  if (e.target === $modalWr3) {
-    $modalWr3.classList.add('hidden')
-    $modalWr3.removeEventListener('click', clickModalWrHandler3)
-    $modalContent3.innerHTML = ''
-  }
-}
+// const clickModalWrHandler3 = (e) => {
+//   if (e.target === $modalWr3) {
+//     $modalWr3.classList.add('hidden')
+//     $modalWr3.removeEventListener('click', clickModalWrHandler3)
+//     $modalContent3.innerHTML = ''
+//   }
+// }
 
-const openModalHandler3 = (e) => {
-  const targetModalName = e.target.dataset.openmodal
+// const openModalHandler3 = (e) => {
+//   const targetModalName = e.target.dataset.openmodal
 
-  if (targetModalName === 'ChangeCat') {
-    $modalWr3.classList.remove('hidden')
-    $modalWr3.addEventListener('click', clickModalWrHandler3)
+//   if (targetModalName === 'ChangeCat') {
+//     $modalWr3.classList.remove('hidden')
+//     $modalWr3.addEventListener('click', clickModalWrHandler3)
 
-    const cloneCatRemoveForm = $catRemoveFormTemplate.content.cloneNode(true)
-    $modalContent3.appendChild(cloneCatRemoveForm)
+//     const cloneCatRemoveForm = $catRemoveFormTemplate.content.cloneNode(true)
+//     $modalContent3.appendChild(cloneCatRemoveForm)
 
-    const $ChangeCatForm = document.forms.ChangeCatForm
+//     const $ChangeCatForm = document.forms.ChangeCatForm
 
-    const dataFromLS = localStorage.getItem(CHANGE_FORM_LS_KEY)
+//     const dataFromLS = localStorage.getItem(CHANGE_FORM_LS_KEY)
 
-    const preparedDataFromLS = dataFromLS && JSON.parse(dataFromLS)
+//     const preparedDataFromLS = dataFromLS && JSON.parse(dataFromLS)
 
-    if (preparedDataFromLS) {
-      Object.keys(preparedDataFromLS).forEach((key) => {
-        $ChangeCatForm[key].value = preparedDataFromLS[key]
-      })
-    }
+//     if (preparedDataFromLS) {
+//       Object.keys(preparedDataFromLS).forEach((key) => {
+//         $ChangeCatForm[key].value = preparedDataFromLS[key]
+//       })
+//     }
 
-    $ChangeCatForm.addEventListener('submit', (submitEvent) => {
-      submitEvent.preventDefault()
+//     $ChangeCatForm.addEventListener('submit', (submitEvent) => {
+//       submitEvent.preventDefault()
 
-      const formDataObject = formatRemoveFormData(
-        Object.fromEntries(new FormData(submitEvent.target).entries()),
-      )
+//       const formDataObject = formatRemoveFormData(
+//         Object.fromEntries(new FormData(submitEvent.target).entries()),
+//       )
 
-      fetch('https://cats.petiteweb.dev/api/single/Lukanach/update/{id}', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formDataObject),
-      }).then((res) => {
-        if (res.status === 200) {
-          $modalWr3.classList.add('hidden')
-          $modalWr3.removeEventListener('click', clickModalWrHandler3)
-          $modalContent3.innerHTML = ''
+//       fetch('https://cats.petiteweb.dev/api/single/Lukanach/update/{id}', {
+//         method: 'PUT',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(formDataObject),
+//       }).then((res) => {
+//         if (res.status === 200) {
+//           $modalWr3.classList.add('hidden')
+//           $modalWr3.removeEventListener('click', clickModalWrHandler3)
+//           $modalContent3.innerHTML = ''
 
-          localStorage.removeItem(CHANGE_FORM_LS_KEY)
-          return $wr3.insertAdjacentHTML(
-            'afterbegin',
-            getCatHTML(formDataObject),
-          )
-        }
-      }).catch(alert)
-    })
-    $ChangeCatForm.addEventListener('change', () => {
-      const formattedData = formatRemoveFormData(
-        Object.fromEntries(new FormData($ChangeCatForm).entries()),
-      )
+//           localStorage.removeItem(CHANGE_FORM_LS_KEY)
+//           return $wr3.insertAdjacentHTML(
+//             'afterbegin',
+//             getCatHTML(formDataObject),
+//           )
+//         }
+//       }).catch(alert)
+//     })
+//     $ChangeCatForm.addEventListener('change', () => {
+//       const formattedData = formatRemoveFormData(
+//         Object.fromEntries(new FormData($ChangeCatForm).entries()),
+//       )
 
-      localStorage.setItem(CHANGE_FORM_LS_KEY, JSON.stringify(formattedData))
-    })
-  }
-}
-document.addEventListener('click', openModalHandler3)
+//       localStorage.setItem(CHANGE_FORM_LS_KEY, JSON.stringify(formattedData))
+//     })
+//   }
+// }
+// document.addEventListener('click', openModalHandler3)
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    $modalWr3.classList.add('hidden')
-    $modalWr3.removeEventListener('click', clickModalWrHandler3)
-    $modalContent3.innerHTML = ''
-  }
-})
+// document.addEventListener('keydown', (e) => {
+//   if (e.key === 'Escape') {
+//     $modalWr3.classList.add('hidden')
+//     $modalWr3.removeEventListener('click', clickModalWrHandler3)
+//     $modalContent3.innerHTML = ''
+//   }
+// })
